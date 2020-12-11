@@ -5,6 +5,14 @@
 	margin-bottom: 10px;
 }
 
+.beer > img {
+	flex: 0.25;
+	width: 20%;
+	height: 100%;
+	max-width: 100px;
+	max-height: 200px;
+}
+
 .beer ul {
 	list-style: none;
 	font-weight: 400;
@@ -13,10 +21,4 @@
 .beer > ul > li > strong {
 	font-weight: 900;
 	font-style: normal;
-}
-
-.beer > img {
-	flex: 0.25;
-	width: 20%;
-	height: 100%;
 }

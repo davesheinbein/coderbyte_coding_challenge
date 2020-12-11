@@ -7,7 +7,7 @@ function loadBeers() {
 	var xhr = new XMLHttpRequest();
 	// console.log('🚀 ~ xhr log >', xhr);
 	// console.dir('🚀 ~ xhr dir >', xhr);
-	console.table('🚀 ~ xhr table >', xhr);
+	// console.table('🚀 ~ xhr table >', xhr);
 	xhr.open('GET', 'https://api.punkapi.com/v2/beers', true);
 
 	// We have a simple API that returns a JSON array.
@@ -22,13 +22,11 @@ function loadBeers() {
 			// 	this.responseText
 			// );
 			var beers = JSON.parse(this.responseText);
-			console.table('🚀 ~ beers', beers);
+			// console.table('🚀 ~ beers', beers);
 
-			let sortedOutput = beers.sort((a, b) =>
-				a.name > b.name ? 1 : -1
-			);
+			beers.sort((a, b) => (a.name > b.name ? 1 : -1));
 
-			console.table('🚀 ~ sortedOutput', sortedOutput);
+			// console.table('🚀 ~ beers.sort((a, b) => (a.name > b.name ? 1 : -1));', beers.sort((a, b) => (a.name > b.name ? 1 : -1)););
 
 			var output = '';
 			for (var i in beers) {
@@ -61,12 +59,6 @@ function loadBeers() {
 			}
 
 			// console.log(output, '< output');
-
-			// let sortedOutput = output.filter(
-			// 	(a, b) => a.name - b.name
-			// );
-
-			// console.log(sortedOutput, '< sortedOutput');
 
 			document.getElementById('beers').innerHTML = output;
 		}
