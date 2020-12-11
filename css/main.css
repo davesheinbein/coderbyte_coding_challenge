@@ -1,0 +1,22 @@
+.beer {
+	display: flex;
+	background: #f4f4f4;
+	padding: 10px;
+	margin-bottom: 10px;
+}
+
+.beer ul {
+	list-style: none;
+	font-weight: 400;
+	font-style: italic;
+}
+.beer > ul > li > strong {
+	font-weight: 900;
+	font-style: normal;
+}
+
+.beer > img {
+	flex: 0.25;
+	width: 20%;
+	height: 100%;
+}
