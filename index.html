@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>Coderbyte API Call</title>
+		<style>
+			/* styles each beer */
+			.beer {
+				display: flex;
+				background: #f4f4f4;
+				padding: 10px;
+				margin-bottom: 10px;
+			}
+
+			.beer ul {
+				list-style: none;
+				font-weight: 400;
+				font-style: italic;
+			}
+			.beer > ul > li > strong {
+				font-weight: 900;
+				font-style: normal;
+			}
+
+			.beer > img {
+				flex: 0.25;
+				width: 20%;
+				height: 100%;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- Here is a quick coding challenge. 
+
+        We just want to get a sense for how you write code and solve problems within a given time limit.
+        
+        You will have 2 hours to complete this. Starting with the time that the test was sent to you. 
+        
+        We have a simple API that returns a JSON array. -->
+
+		<!-- https://api.punkapi.com/v2/beers  -->
+		<!-- Documentation for this API: https://punkapi.com/documentation/v2  -->
+
+		<!-- We would like you to use HTML, CSS, and Javascript to read the
+		API and display it in an organized way. You do not have
+		to display all of the information that the API provides.
+		Find a balanced way to display as much information as
+		possible without compromising the user experience. As a
+		bonus feature (not required), you should add in some
+		sort of sorting mechanic to the front-end. Please code
+		this from scratch or feel free to use any frameworks you
+		would like to achieve the task. Please know the test
+		will be scored on good use of HTML, CSS, and Javascript,
+		NOT in how well you know the framework. Get creative!
+		How to submit Please upload the code for this project to
+		GitHub, and post a link to your repository below. You
+		should at least have a HTML file.  -->
+
+		<button id="button">Load API Data</button>
+		<br /><br />
+		<h1>Beers</h1>
+		<div id="beers"></div>
+
+		<script>
+			document
+				.getElementById('button')
+				.addEventListener('click', loadBeers);
+
+			// Load Github Users
+			function loadBeers() {
+				var xhr = new XMLHttpRequest();
+				// console.log('🚀 ~ xhr log >', xhr);
+				// console.dir('🚀 ~ xhr dir >', xhr);
+				console.table('🚀 ~ xhr table >', xhr);
+				xhr.open(
+					'GET',
+					'https://api.punkapi.com/v2/beers',
+					true
+				);
+
+				// We have a simple API that returns a JSON array.
+				//  --> https://api.punkapi.com/v2/beers
+				// --> Documentation for this API: https://punkapi.com/documentation/v2
+
+				xhr.onload = function () {
+					// console.log('🚀 ~ status', status);
+					if (this.status == 200) {
+						// console.log(
+						// 	'🚀 ~ this.responseText',
+						// 	this.responseText
+						// );
+						var beers = JSON.parse(this.responseText);
+						console.table('🚀 ~ beers', beers);
+
+						let sortedOutput = beers.sort((a, b) =>
+							a.name > b.name ? 1 : -1
+						);
+
+						console.table(
+							'🚀 ~ sortedOutput',
+							sortedOutput
+						);
+
+						var output = '';
+						for (var i in beers) {
+							output +=
+								'<div class="beer">' +
+								'<img src="' +
+								beers[i].image_url +
+								'" width="70" height="70">' +
+								'<ul>' +
+								'<li><strong>ID: </strong>' +
+								beers[i].id +
+								'</li>' +
+								'<li><strong>Name: </strong>' +
+								beers[i].name +
+								'</li>' +
+								'<li><strong>First Brewed: </strong>' +
+								beers[i].first_brewed +
+								'</li>' +
+								'<li><strong>Description: </strong>' +
+								beers[i].description +
+								'</li>' +
+								'<li><strong>Tagline: </strong>' +
+								beers[i].tagline +
+								'</li>' +
+								'<li><strong>Brewers Tips: </strong>' +
+								beers[i].brewers_tips +
+								'</li>' +
+								'</ul>' +
+								'</div>';
+						}
+
+						// console.log(output, '< output');
+
+						// let sortedOutput = output.filter(
+						// 	(a, b) => a.name - b.name
+						// );
+
+						// console.log(sortedOutput, '< sortedOutput');
+
+						document.getElementById(
+							'beers'
+						).innerHTML = output;
+					}
+				};
+
+				xhr.send();
+			}
+		</script>
+	</body>
+</html>
